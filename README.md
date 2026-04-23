@@ -2,6 +2,14 @@
 
 Aplicação construída com Streamlit para visualização e análise de dados.
 
+## 🗄️ Banco de dados
+
+Este projeto utiliza **MongoDB** como banco de dados.
+
+O seed da base está em:
+
+`db/provedores.json`
+
 ## Desafios
 
 Utilizando a base de dados de provedores de Pelotas e o MongoDB, crie 7 arquivos em PHP, Node ou Python, com saída em HTML, para atender os seguintes requisitos:
@@ -58,6 +66,7 @@ Ao total, 61 documentos foram alterados:
 
 - Python 3.10+ (recomendado 3.10 ou 3.11)
 - pip
+- MongoDB
 
 ---
 
@@ -131,6 +140,8 @@ deactivate
 
 ```
 .
+├── db/
+│   └── provedores.json
 ├── app.py
 ├── requirements.txt
 └── venv/
