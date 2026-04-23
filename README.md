@@ -64,57 +64,40 @@ Ao total, 61 documentos foram alterados:
 
 ## 🚀 Requisitos
 
-- Python 3.10+ (recomendado 3.10 ou 3.11)
-- pip
+- Python 3.12+
+- Poetry
 - MongoDB
 
 ---
 
 ## ⚙️ Setup do ambiente
 
-### 1. Instalar dependências do sistema (Ubuntu/Debian)
+### 1. Instalar Poetry
 
 ```bash
-sudo apt update
-sudo apt install python3-venv -y
+pipx install poetry
 ```
 
 ---
 
-### 2. Criar ambiente virtual
+> Alternativa com `pip`:
 
 ```bash
-python3 -m venv venv
+pip install poetry
 ```
 
 ---
 
-### 3. Ativar ambiente
+### 2. Instalar dependências do projeto
 
 ```bash
-source venv/bin/activate
+poetry install
 ```
-
----
-
-### 4. Instalar dependências
-
-```bash
-pip install streamlit
-```
-
-> Se tiver `requirements.txt`:
-
-```bash
-pip install -r requirements.txt
-```
-
----
 
 ## ▶️ Rodar o projeto
 
 ```bash
-streamlit run app.py
+poetry run streamlit run app.py
 ```
 
 Depois disso, o app vai abrir automaticamente no navegador:
@@ -127,11 +110,12 @@ http://localhost:8501
 
 ## 🧠 Dicas
 
-- Sempre ative o ambiente virtual antes de rodar o projeto
-- Para sair do ambiente:
+- Você pode usar `poetry shell` para entrar no ambiente
+- Ou executar tudo com `poetry run` sem ativar shell
+- Para sair do shell do Poetry:
 
 ```bash
-deactivate
+exit
 ```
 
 ---
@@ -143,31 +127,8 @@ deactivate
 ├── db/
 │   └── provedores.json
 ├── app.py
-├── requirements.txt
-└── venv/
+└── pyproject.toml
 ```
-
----
-
-## ❓ Problemas comuns
-
-### Erro com venv
-
-Instale:
-
-```bash
-sudo apt install python3-venv
-```
-
-### Erro de dependências
-
-Reinstale:
-
-```bash
-pip install -r requirements.txt
-```
-
----
 
 ## 📌 Observações
 
