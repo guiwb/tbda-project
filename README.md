@@ -167,19 +167,3 @@ http://localhost:8501
 ```bash
 exit
 ```
-
----
-
-## 📁 Estrutura (exemplo)
-
-```
-.
-├── db/
-│   └── provedores.json
-├── app.py
-└── pyproject.toml
-```
-
-## 📌 Observações
-
-Projeto local para análise de dados com Streamlit. Pode ser facilmente adaptado para deploy em cloud (Streamlit Cloud, AWS, etc).
