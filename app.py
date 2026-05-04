@@ -5,15 +5,18 @@ from services.mongo import list_all
 
 st.set_page_config(layout="wide", page_title="Internet em Pelotas")
 
+
 def ultimas_mensuracoes(df):
     last_date = df["mensuracao"].max()
     return df[df["mensuracao"] == last_date]
+
 
 @st.cache_data
 def load_data():
     df = list_all()
     df["mensuracao"] = pd.to_datetime(df["mensuracao"])
     return df
+
 
 df = load_data()
 
@@ -26,7 +29,8 @@ page = st.sidebar.radio(
 
 st.sidebar.title("Filtros")
 
-top_empresas =  ultimas_mensuracoes(df).groupby("empresa")["qt"].sum().nlargest(5).index.tolist()
+top_empresas = ultimas_mensuracoes(df).groupby(
+    "empresa")["qt"].sum().nlargest(5).index.tolist()
 
 empresas = st.sidebar.multiselect(
     "Provedor",
@@ -49,7 +53,8 @@ if page == "📊 Visão geral":
     st.title("📊 Visão geral do mercado")
 
     total = int(ultimas_mensuracoes(df_filtered)["qt"].sum())
-    top_empresa = ultimas_mensuracoes(df_filtered).groupby("empresa")["qt"].sum().idxmax()
+    top_empresa = ultimas_mensuracoes(df_filtered).groupby("empresa")[
+        "qt"].sum().idxmax()
 
     col1, col2 = st.columns(2)
     col1.metric("Total de assinantes", total)
@@ -64,21 +69,24 @@ if page == "📊 Visão geral":
 
     st.markdown("### Market share")
 
-    share = ultimas_mensuracoes(df_filtered).groupby("empresa")["qt"].sum().reset_index()
+    share = ultimas_mensuracoes(df_filtered).groupby("empresa")[
+        "qt"].sum().reset_index()
     fig2 = px.pie(share, names="empresa", values="qt")
     st.plotly_chart(fig2, use_container_width=True)
 
 elif page == "🏢 Provedores":
     st.title("🏢 Análise de provedores")
 
-    ranking = ultimas_mensuracoes(df_filtered).groupby("empresa")["qt"].sum().sort_values(ascending=False).reset_index()
+    ranking = ultimas_mensuracoes(df_filtered).groupby(
+        "empresa")["qt"].sum().sort_values(ascending=False).reset_index()
 
     fig = px.bar(ranking, x="empresa", y="qt", text_auto=True)
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("### Evolução de assinantes por provedor")
 
-    evolucao = df_filtered.groupby(["mensuracao", "empresa"])["qt"].sum().reset_index()
+    evolucao = df_filtered.groupby(["mensuracao", "empresa"])[
+        "qt"].sum().reset_index()
 
     fig2 = px.line(evolucao, x="mensuracao", y="qt", color="empresa")
     st.plotly_chart(fig2, use_container_width=True)
@@ -94,11 +102,11 @@ elif page == "⚡ Velocidade":
         bins=bins,
         labels=labels
     )
-    
+
     vel_time = df_filtered.groupby(
         ["mensuracao", "faixa_vel"]
     )["qt"].sum().reset_index()
-        
+
     fig = px.line(
         vel_time,
         x="mensuracao",
@@ -112,7 +120,8 @@ elif page == "⚡ Velocidade":
 elif page == "🧪 Tecnologia":
     st.title("🧪 Tecnologias de acesso")
 
-    tec = ultimas_mensuracoes(df_filtered).groupby("tecnologia")["qt"].sum().reset_index()
+    tec = ultimas_mensuracoes(df_filtered).groupby(
+        "tecnologia")["qt"].sum().reset_index()
 
     fig = px.bar(tec, x="tecnologia", y="qt", text_auto=True)
     st.plotly_chart(fig, use_container_width=True)
@@ -122,7 +131,7 @@ elif page == "🧪 Tecnologia":
     tec_time = df_filtered.groupby(
         ["mensuracao", "tecnologia"]
     )["qt"].sum().reset_index()
-    
+
     fig = px.line(
         tec_time,
         x="mensuracao",
