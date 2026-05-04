@@ -20,10 +20,10 @@ def load_data():
 
 df = load_data()
 
-st.sidebar.title("Páginas")
+st.sidebar.title("Navegação")
 
 page = st.sidebar.radio(
-    "Navegação",
+    "-- Selecione a página --",
     ["📊 Visão geral", "🏢 Provedores", "⚡ Velocidade", "🧪 Tecnologia"]
 )
 
